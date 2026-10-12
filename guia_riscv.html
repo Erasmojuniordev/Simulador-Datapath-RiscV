@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RISC-V Lab - Colinha RV32I</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--card:#172239;--edge:#2a3854;--text:#f2f5fc;--muted:#9aa9c4;--blue:#62b4ff;--green:#65e3b2;--orange:#ffca79;--purple:#c3a0ff}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 70% 0%,#19254a 0%,var(--bg) 50%);color:var(--text);line-height:1.45}.page{max-width:1320px;margin:auto;padding:28px 22px 55px}a{color:#b8e1ff}.eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;color:var(--green);text-transform:uppercase}.top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:24px}.top h1{font-size:clamp(29px,4vw,43px);letter-spacing:-.04em;line-height:1.1;margin:7px 0 10px}.top p{margin:0;max-width:730px;color:var(--muted);font-size:14px}.back{display:inline-flex;align-items:center;gap:8px;border:1px solid #365077;background:#182747;border-radius:999px;padding:9px 13px;text-decoration:none;color:#d7edff;font-size:12px;font-weight:700;white-space:nowrap}.back:hover{background:#243b60}.panel{background:rgba(18,26,45,.94);border:1px solid var(--edge);border-radius:15px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.11);margin-top:15px}.intro{padding:17px 19px;color:#c8d6eb;font-size:13px}.intro strong{color:white}.tabs{display:flex;gap:8px;overflow-x:auto;padding:14px 17px;border-bottom:1px solid var(--edge)}.tab{border:1px solid #344766;border-radius:8px;background:#1e2e48;color:#d9e9fc;padding:8px 11px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}.tab.active{background:#185b96;border-color:#56aef1;color:white}.section{display:none;padding:18px}.section.active{display:block}.section h2{font-size:18px;margin:0 0 7px;letter-spacing:-.02em}.section>p{margin:0 0 15px;color:var(--muted);font-size:13px}.table-wrap{overflow:auto;border:1px solid #2b3b58;border-radius:10px}table{border-collapse:collapse;width:100%;min-width:850px;font-size:12px}th,td{padding:10px 11px;text-align:left;border-bottom:1px solid #263754;vertical-align:top}th{background:#192941;color:#d7eafd;font-size:10px;letter-spacing:.07em;text-transform:uppercase;position:sticky;top:0}tr:last-child td{border-bottom:0}tr:hover td{background:#17263d}.family{color:var(--green);font-weight:800}.mono{font:700 12px ui-monospace,SFMono-Regular,Consolas,monospace;white-space:nowrap;color:#d9edff}.dash{color:#71829e}.note{margin-top:13px;padding:12px 13px;border:1px solid #344766;border-radius:9px;background:#101a2d;color:#c8d6eb;font-size:12px}.note strong{color:#fff}.reg-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.reg{border:1px solid #30425f;border-radius:9px;background:#101a2d;padding:10px}.reg .row{display:flex;justify-content:space-between;gap:7px;align-items:baseline}.reg strong{color:#dff1ff;font-size:14px}.reg span{color:var(--green);font:700 12px ui-monospace,Consolas,monospace}.reg small{color:var(--muted);font-size:11px;display:block;margin-top:3px}.converter{display:grid;grid-template-columns:minmax(260px,.82fr) minmax(340px,1.18fr);gap:15px}.converter-card{border:1px solid #30425f;border-radius:10px;background:#101a2d;padding:15px}.converter label{color:var(--muted);font-size:11px;font-weight:800;display:block;margin-bottom:6px}.converter input,.converter select{width:100%;border:1px solid #3a506f;border-radius:8px;background:#0a1221;color:#f2f5fc;padding:10px;font:14px ui-monospace,Consolas,monospace}.converter select{margin-top:11px;font-family:inherit}.result{margin:14px 0 8px;padding:13px;border-radius:8px;background:#0a1324;border:1px solid #2e4a6b;overflow:auto}.result small{display:block;color:var(--muted);font-size:10px;margin-bottom:5px}.result strong{font:700 clamp(16px,2.8vw,27px) ui-monospace,Consolas,monospace;letter-spacing:.05em;color:var(--green);word-break:break-all}.steps{margin:0;padding-left:21px;color:#c8d6eb;font-size:12px}.steps li{padding:3px 0}.steps code,.note code{font:700 12px ui-monospace,Consolas,monospace;color:#e3f3ff}.formula{margin:12px 0 0;padding:11px;border-radius:8px;background:#182a43;border-left:3px solid var(--blue);font:13px ui-monospace,Consolas,monospace;color:#d9ecff}@media(max-width:850px){.top{display:block}.back{margin-top:15px}.reg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.converter{grid-template-columns:1fr}}@media(max-width:500px){.page{padding:18px 12px 38px}.reg-grid{grid-template-columns:1fr}.section{padding:14px}.converter-card{padding:13px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <div>
+        <div class="eyebrow">Arquitetura de Computadores · Referência rápida</div>
+        <h1>Colinha <span style="color:var(--blue)">RV32I</span></h1>
+        <p>Consulte a codificação das instruções-base, os nomes do banco de registradores e converta números para binário sem sair do laboratório.</p>
+      </div>
+      <a class="back" href="./riscv_datapath_interativo.html">← Voltar ao datapath</a>
+    </header>
+
+    <section class="panel">
+      <div class="intro"><strong>Como ler as tabelas:</strong> cada campo é mostrado na ordem em que aparece na instrução de 32 bits. <code>funct3</code> e <code>funct7</code> refinam a operação selecionada pelo <code>opcode</code>. Um traço indica que o campo não é usado para distinguir aquela instrução.</div>
+      <nav class="tabs" aria-label="Conteúdo da colinha">
+        <button class="tab active" data-tab="instructions">Instruções RV32I</button>
+        <button class="tab" data-tab="registers">Banco de registradores</button>
+        <button class="tab" data-tab="converter">Conversor decimal → binário</button>
+      </nav>
+
+      <section class="section active" id="instructions">
+        <h2>Famílias de instruções</h2>
+        <p>Subset-base RV32I mais cobrado em datapath de ciclo único. Valores em binário; os campos de imediato variam conforme o formato.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Família / formato</th><th>Instrução</th><th>Uso</th><th>opcode [6:0]</th><th>funct3 [14:12]</th><th>funct7 [31:25]</th></tr></thead>
+            <tbody>
+              <tr><td class="family">R</td><td class="mono">add rd, rs1, rs2</td><td>Soma</td><td class="mono">0110011</td><td class="mono">000</td><td class="mono">0000000</td></tr>
+              <tr><td class="family">R</td><td class="mono">sub rd, rs1, rs2</td><td>Subtração</td><td class="mono">0110011</td><td class="mono">000</td><td class="mono">0100000</td></tr>
+              <tr><td class="family">R</td><td class="mono">sll rd, rs1, rs2</td><td>Desloca à esquerda</td><td class="mono">0110011</td><td class="mono">001</td><td class="mono">0000000</td></tr>
+              <tr><td class="family">R</td><td class="mono">slt / sltu rd, rs1, rs2</td><td>Menor que, com/sem sinal</td><td class="mono">0110011</td><td class="mono">010 / 011</td><td class="mono">0000000</td></tr>
+              <tr><td class="family">R</td><td class="mono">xor / or / and rd, rs1, rs2</td><td>Lógicas bit a bit</td><td class="mono">0110011</td><td class="mono">100 / 110 / 111</td><td class="mono">0000000</td></tr>
+              <tr><td class="family">R</td><td class="mono">srl / sra rd, rs1, rs2</td><td>Desloca à direita lógico / aritmético</td><td class="mono">0110011</td><td class="mono">101</td><td class="mono">0000000 / 0100000</td></tr>
+              <tr><td class="family">I-ALU</td><td class="mono">addi rd, rs1, imm</td><td>Soma com imediato</td><td class="mono">0010011</td><td class="mono">000</td><td class="dash">—</td></tr>
+              <tr><td class="family">I-ALU</td><td class="mono">slti / sltiu rd, rs1, imm</td><td>Menor que imediato</td><td class="mono">0010011</td><td class="mono">010 / 011</td><td class="dash">—</td></tr>
+              <tr><td class="family">I-ALU</td><td class="mono">xori / ori / andi rd, rs1, imm</td><td>Lógicas com imediato</td><td class="mono">0010011</td><td class="mono">100 / 110 / 111</td><td class="dash">—</td></tr>
+              <tr><td class="family">I-shift</td><td class="mono">slli rd, rs1, shamt</td><td>Desloca à esquerda</td><td class="mono">0010011</td><td class="mono">001</td><td class="mono">0000000</td></tr>
+              <tr><td class="family">I-shift</td><td class="mono">srli / srai rd, rs1, shamt</td><td>Desloca à direita</td><td class="mono">0010011</td><td class="mono">101</td><td class="mono">0000000 / 0100000</td></tr>
+              <tr><td class="family">Load (I)</td><td class="mono">lb / lh / lw</td><td>Carrega byte, halfword, palavra</td><td class="mono">0000011</td><td class="mono">000 / 001 / 010</td><td class="dash">—</td></tr>
+              <tr><td class="family">Load (I)</td><td class="mono">lbu / lhu</td><td>Carrega sem sinal</td><td class="mono">0000011</td><td class="mono">100 / 101</td><td class="dash">—</td></tr>
+              <tr><td class="family">Store (S)</td><td class="mono">sb / sh / sw rs2, imm(rs1)</td><td>Armazena byte, halfword, palavra</td><td class="mono">0100011</td><td class="mono">000 / 001 / 010</td><td class="dash">—</td></tr>
+              <tr><td class="family">Branch (B)</td><td class="mono">beq / bne rs1, rs2, imm</td><td>Igual / diferente</td><td class="mono">1100011</td><td class="mono">000 / 001</td><td class="dash">—</td></tr>
+              <tr><td class="family">Branch (B)</td><td class="mono">blt / bge / bltu / bgeu</td><td>Comparações de desvio</td><td class="mono">1100011</td><td class="mono">100 / 101 / 110 / 111</td><td class="dash">—</td></tr>
+              <tr><td class="family">U</td><td class="mono">lui rd, imm20</td><td>Carrega imediato superior</td><td class="mono">0110111</td><td class="dash">—</td><td class="dash">—</td></tr>
+              <tr><td class="family">U</td><td class="mono">auipc rd, imm20</td><td>PC + imediato superior</td><td class="mono">0010111</td><td class="dash">—</td><td class="dash">—</td></tr>
+              <tr><td class="family">Jump (J)</td><td class="mono">jal rd, imm</td><td>Salta e guarda retorno</td><td class="mono">1101111</td><td class="dash">—</td><td class="dash">—</td></tr>
+              <tr><td class="family">Jump (I)</td><td class="mono">jalr rd, imm(rs1)</td><td>Salto indireto</td><td class="mono">1100111</td><td class="mono">000</td><td class="dash">—</td></tr>
+              <tr><td class="family">Fence</td><td class="mono">fence</td><td>Ordena acessos à memória</td><td class="mono">0001111</td><td class="mono">000</td><td class="dash">—</td></tr>
+              <tr><td class="family">System</td><td class="mono">ecall / ebreak</td><td>Chamada ao ambiente / interrupção</td><td class="mono">1110011</td><td class="mono">000</td><td class="dash">imm = 000000000000 / 000000000001</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note"><strong>Atenção aos shifts imediatos:</strong> em RV32I, os cinco bits baixos do imediato formam <code>shamt</code>; o valor mostrado em <code>funct7</code> representa os sete bits altos do campo imediato e diferencia <code>srli</code> de <code>srai</code>. <strong>FENCE, ECALL e EBREAK</strong> pertencem ao conjunto-base, mas não são simulados no datapath didático atual porque exigem regras de memória ou interação com o ambiente de execução.</div>
+      </section>
+
+      <section class="section" id="registers">
+        <h2>Registradores inteiros</h2>
+        <p>O endereço de cada registrador ocupa 5 bits. Os nomes ABI são os apelidos usados pelo assembler/RARS.</p>
+        <div class="reg-grid" id="registerGrid"></div>
+        <div class="note"><strong>x0 / zero</strong> sempre lê como 0; escritas nele são descartadas. <strong>ra</strong> guarda retorno de chamadas; <strong>sp</strong> aponta para a pilha; <strong>a0–a7</strong> normalmente levam argumentos e retorno; <strong>t*</strong> são temporários e <strong>s*</strong> devem ser preservados por uma função chamada.</div>
+      </section>
+
+      <section class="section" id="converter">
+        <h2>Conversor decimal para binário</h2>
+        <p>Escolha se deseja uma palavra de 32 bits com sinal, como a ULA RV32I manipula, ou um código de registrador de 5 bits.</p>
+        <div class="converter">
+          <div class="converter-card">
+            <label for="decimal">Valor decimal</label>
+            <input id="decimal" type="number" value="42" step="1">
+            <select id="width" aria-label="Modo de conversão">
+              <option value="32">Palavra RV32I: 32 bits com sinal</option>
+              <option value="5">Código de registrador: 5 bits sem sinal</option>
+            </select>
+            <div class="result"><small id="resultLabel">Representação em 32 bits</small><strong id="binaryResult"></strong></div>
+            <div class="formula" id="hexResult"></div>
+          </div>
+          <div class="converter-card">
+            <label>Como o resultado foi obtido</label>
+            <ol class="steps" id="steps"></ol>
+          </div>
+        </div>
+        <div class="note"><strong>Inteiros positivos:</strong> divida o valor por 2 repetidamente e leia os restos de baixo para cima. <strong>Inteiros negativos em RV32I:</strong> usa-se complemento de dois: represente <code>2³² + valor</code> em binário. Isso equivale a inverter os bits do valor positivo e somar 1.</div>
+      </section>
+    </section>
+  </main>
+  <script>
+    (() => {
+      'use strict';
+      const registers = [
+        ['zero','constante zero'],['ra','endereço de retorno'],['sp','ponteiro da pilha'],['gp','global pointer'],['tp','thread pointer'],
+        ['t0','temporário'],['t1','temporário'],['t2','temporário'],['s0 / fp','salvo / frame pointer'],['s1','salvo'],
+        ['a0','argumento / retorno'],['a1','argumento / retorno'],['a2','argumento'],['a3','argumento'],['a4','argumento'],['a5','argumento'],['a6','argumento'],['a7','argumento'],
+        ['s2','salvo'],['s3','salvo'],['s4','salvo'],['s5','salvo'],['s6','salvo'],['s7','salvo'],['s8','salvo'],['s9','salvo'],['s10','salvo'],['s11','salvo'],
+        ['t3','temporário'],['t4','temporário'],['t5','temporário'],['t6','temporário']
+      ];
+      const grid = document.getElementById('registerGrid');
+      grid.innerHTML = registers.map(([alias, purpose], index) => '<article class="reg"><div class="row"><strong>x' + index + '</strong><span>' + index.toString(2).padStart(5, '0') + '</span></div><small>' + alias + ' · ' + purpose + '</small></article>').join('');
+
+      document.querySelectorAll('.tab').forEach(button => button.addEventListener('click', () => {
+        document.querySelectorAll('.tab,.section').forEach(el => el.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+      }));
+
+      const decimal = document.getElementById('decimal');
+      const width = document.getElementById('width');
+      const result = document.getElementById('binaryResult');
+      const resultLabel = document.getElementById('resultLabel');
+      const hex = document.getElementById('hexResult');
+      const steps = document.getElementById('steps');
+      const asBits = (value, bits) => (value >>> 0).toString(2).padStart(bits, '0').slice(-bits);
+      function renderConverter() {
+        const bits = Number(width.value);
+        let value = Number(decimal.value);
+        if (!Number.isInteger(value)) value = 0;
+        const min = bits === 32 ? -2147483648 : 0;
+        const max = bits === 32 ? 2147483647 : 31;
+        value = Math.max(min, Math.min(max, value));
+        decimal.value = value;
+        const unsigned = bits === 32 && value < 0 ? 4294967296 + value : value;
+        const binary = asBits(unsigned, bits);
+        result.textContent = binary.match(new RegExp('.{1,' + (bits === 32 ? 4 : 5) + '}', 'g')).join(' ');
+        resultLabel.textContent = bits === 32 ? 'Representação em 32 bits (complemento de dois)' : 'Código de registrador em 5 bits';
+        hex.textContent = bits === 32 ? 'Hexadecimal: 0x' + (unsigned >>> 0).toString(16).padStart(8, '0').toUpperCase() : 'Decimal ' + value + ' = binário ' + binary;
+        const list = [];
+        if (value < 0) {
+          list.push('O número é negativo. Em 32 bits, calcule 2³² + (' + value + ') = ' + unsigned + '.');
+          list.push('Converta ' + unsigned + ' para binário e mantenha exatamente 32 bits.');
+          list.push('Resultado: ' + binary.match(/.{1,4}/g).join(' ') + '.');
+        } else if (value === 0) {
+          list.push('Zero é representado por todos os bits iguais a 0.');
+        } else {
+          let quotient = value;
+          while (quotient > 0) {
+            const remainder = quotient % 2;
+            const next = Math.floor(quotient / 2);
+            list.push(quotient + ' ÷ 2 = ' + next + ', resto ' + remainder + '.');
+            quotient = next;
+          }
+          list.push('Leia os restos do último para o primeiro: ' + value.toString(2) + '.');
+          list.push('Complete com zeros à esquerda até formar ' + bits + ' bits.');
+        }
+        steps.innerHTML = list.map(item => '<li>' + item + '</li>').join('');
+      }
+      decimal.addEventListener('input', renderConverter);
+      width.addEventListener('change', renderConverter);
+      renderConverter();
+    })();
+  </script>
+</body>
+</html>
